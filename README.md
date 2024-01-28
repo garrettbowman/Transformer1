@@ -1,2 +1,2 @@
 # LearningAI
-random AI robotics stuff
+First transfomer model umar yt
