@@ -98,6 +98,6 @@ class EncoderBlock(nn.Module):
         self.feed_forward = FeedForwardBlock(embedding_size, hidden_size, dropout)
         self.residual_connection = ResidualConnectionBlock(embedding_size, dropout)
 
-    def forward(self, x):
-        x = self.residual_connection(x, lambda x: self.attention(x))
+    def forward(self, x, src_mask):
+        x = self.residual_connection(x, lambda x: self.attention(x, x, x, src_mask))
         return self.residual_connection(x, self.feed_forward)
