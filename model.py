@@ -137,3 +137,11 @@ class Decoder(nn.Module):
         for layer in self.layers:
             x = layer(x, encoder_output, src_mask, tgt_mask)
         return self.norm(x)        
+
+class ProjectionLayer(nn.Module):
+    def __init__(self, embedding_size: int, vocab_size: int) -> None:
+        super().__init__()
+        self.linear = nn.Linear(embedding_size, vocab_size)
+        
+    def forward(self, x):
+        return F.log_softmax(self.linear(x), dim=-1)
